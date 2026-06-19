@@ -1,10 +1,13 @@
+import CurrentDate from "@/components/common/CurrentDate";
+import Header from "@/components/layout/Header";
 import Image from "next/image";
-
+export const metadata = {
+  title: 'DashBoard Overview | KrishiRakshak AI',
+}
 export default function Home() {
   return (
-    <main className="min-h-screen flex flex-col bg-white text-black items-center justify-between p-24">
-      <h1 className="text-2xl font-bold">KrishiRakshak <span className="text-green">AI</span></h1>
-      <p>Here map will come</p>
+    <main>
+      <h1>Map will come here</h1>
     </main>
   );
 }
