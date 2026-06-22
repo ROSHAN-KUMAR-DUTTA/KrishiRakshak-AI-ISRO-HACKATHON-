@@ -66,17 +66,17 @@ const NotFound = () => {
         </div>
 
         {/* Right Side Illustration */}
-        <div className="relative flex min-h-[550px] items-center">
+        <div className="relative flex min-h-137.5 items-center">
           <Image
-  src="/404-not-found.png"
-  alt="404 Not Found"
-  width={753}
-  height={550}
-  priority
-  style={{
-    width: "753px",
-  }}
-/>
+            src="/404-not-found.png"
+            alt="404 Not Found"
+            width={753}
+            height={550}
+            priority
+            style={{
+              width: "753px",
+            }}
+          />
         </div>
 
         {/* Bottom Card */}
