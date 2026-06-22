@@ -21,7 +21,7 @@ const navItems = [
     { name: "Weather", path:"/weather", icon: <CloudSun size={20} /> },
     { name: "Calculator", path:"/calculator", icon: <TrendingUpIcon size={20} /> },
     { name: "Alerts", path:"/alerts", icon: <TriangleAlert size={20} /> },
-    { name: "Reports", path:"/reoprts", icon: <FileText size={20} /> },
+    { name: "Reports", path:"/reports", icon: <FileText size={20} /> },
     { name: "Setting", path:"/settings", icon: <Settings size={20} /> },
   ];
 
@@ -44,7 +44,7 @@ const Sidebar = ({ activeName }:{activeName:string}) => {
             <Link 
               key={item.name} 
               href={item.path}
-              className={`p-3 text-sm flex items-center gap-3 transition rounded-2xl cursor-pointer 
+              className={`p-3 text-sm flex items-center gap-3 transition rounded-2xl cursor-pointer active:scale-95
                 ${isActive ? "bg-[#103720] text-white" : "hover:bg-[#103720] hover:text-white"}`}
             >
               {item.icon}

@@ -4,7 +4,7 @@ import "./globals.css";
 import Header from "@/components/layout/Header";
 import { useState } from "react";
 import CurrentDate from "@/components/common/CurrentDate";
-import { Bell } from "lucide-react";
+import { Bell, SearchX } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { NAV_CONFIG } from "@/lib/nav-config";
 
@@ -13,9 +13,13 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  
-  const pathname=usePathname();
-  const currentConfig=NAV_CONFIG[pathname]||{ title: "Dashboard Overview", subtitle: "Real-time overview of your farm fields", name: "Dashboard" };
+  const pathname = usePathname();
+  const currentConfig = NAV_CONFIG[pathname] || {
+    title: "Page Not Found",
+    subtitle: "404 not found",
+    name: "",
+    icon: SearchX,
+  };
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   return (
     <html lang="en" className="h-full ">
@@ -23,13 +27,14 @@ export default function RootLayout({
         <div
           className={`transition-all duration-300 ease-in-out ${isSidebarOpen ? "w-64" : "w-0"} h-screen sticky top-0 overflow-hidden whitespace-nowrap`}
         >
-          <Sidebar activeName={currentConfig.name}/>
+          <Sidebar activeName={currentConfig.name} />
         </div>
 
         <div className="flex-1 flex flex-col h-screen overflow-y-auto">
           <Header
             title={currentConfig.title}
             subtitle={currentConfig.subtitle}
+            icon={currentConfig.icon}
             rightContent={
               <div className="flex items-center space-x-5">
                 <CurrentDate />
