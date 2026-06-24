@@ -5,6 +5,48 @@
 import ee
 
 
+# =====================================
+# Cloud Masking Function
+# =====================================
+
+def mask_clouds(image):
+    """
+    Remove cloud and cirrus cloud pixels
+    using Sentinel-2 QA60 band.
+    """
+
+    # Select QA60 quality band
+    qa = image.select("QA60")
+
+    # Bit 10 = Cloud
+    cloud_bit_mask = 1 << 10
+
+    # Bit 11 = Cirrus Cloud
+    cirrus_bit_mask = 1 << 11
+
+    # Cloud mask
+    cloud_mask = (
+        qa.bitwiseAnd(cloud_bit_mask)
+        .eq(0)
+    )
+
+    # Cirrus cloud mask
+    cirrus_mask = (
+        qa.bitwiseAnd(cirrus_bit_mask)
+        .eq(0)
+    )
+
+    # Combine masks
+    mask = cloud_mask.And(cirrus_mask)
+
+    # Apply mask
+    return image.updateMask(mask)
+
+
+# =====================================
+# Sentinel-2 Image Fetch Function
+# =====================================
+
 def get_sentinel2_image(
     aoi,
     start_date,
@@ -12,54 +54,78 @@ def get_sentinel2_image(
     cloud_threshold=60
 ):
     """
-    Fetch Sentinel-2 imagery for a given AOI
-    and date range.
+    Fetch latest usable Sentinel-2 image
+    for a given AOI and date range.
 
     Parameters
     ----------
     aoi : ee.Geometry
-        Area of Interest
 
     start_date : str
-        Example: '2025-01-01'
 
     end_date : str
-        Example: '2025-01-31'
 
     cloud_threshold : int
-        Maximum allowed cloud percentage
 
     Returns
     -------
     ee.Image
-        Median Sentinel-2 composite image
+        Latest cloud-masked Sentinel-2 image
     """
 
-    # Load Sentinel-2 Surface Reflectance dataset
+    # =====================================
+    # Create Sentinel-2 Collection
+    # =====================================
+
     collection = (
         ee.ImageCollection(
-            "COPERNICUS/S2_SR_HARMONIZED"
-        )
-
-        # Filter by AOI
+            "COPERNICUS/S2_SR_HARMONIZED" )
         .filterBounds(aoi)
-
-        # Filter by date range
+        
         .filterDate(
             start_date,
-            end_date
-        )
-
-        # Remove highly cloudy images
+            end_date)
+        
         .filter(
             ee.Filter.lt(
                 "CLOUDY_PIXEL_PERCENTAGE",
-                cloud_threshold
+                cloud_threshold  )
             )
-        )
     )
 
-    # Create median composite image
-    image = collection.median()
 
-    return image
+    collection_size = (
+        collection
+        .size()
+        .getInfo() )
+    
+    print( "\nImages Found:",collection_size)
+
+    # No image found
+    if collection_size == 0:
+        raise ValueError(
+            "No Sentinel-2 images found for the selected AOI and date range.")
+
+  
+    # =====================================
+    # Select Latest Usable Image
+    # =====================================
+
+    selected_image = (
+        collection
+        .sort(
+            "system:time_start",
+            False
+        )
+        .first()
+    )
+
+    
+    #cloud masking
+    selected_image = mask_clouds(
+        selected_image
+    )
+
+    # Return Final Image
+    
+    return selected_image

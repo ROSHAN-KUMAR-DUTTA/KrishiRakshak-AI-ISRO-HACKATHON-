@@ -39,9 +39,9 @@ user_input = {
 
     "radius": 1500,
 
-    "start_date": "2025-07-01",
+    "start_date": "2025-06-10",
 
-    "end_date": "2025-07-31" }
+    "end_date": "2025-07-10" }
 
 # =====================================
 # Input Validation
@@ -166,3 +166,4 @@ final_json = {
 print("\nFinal JSON Output\n")
 
 print( json.dumps ( final_json , indent=4 ) )
+
