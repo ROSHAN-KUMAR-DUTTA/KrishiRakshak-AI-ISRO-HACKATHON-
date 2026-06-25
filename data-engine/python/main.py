@@ -12,8 +12,15 @@ from core.aoi import create_aoi
 # Import Sentinel-2 module
 from core.sentinel2 import get_sentinel2_image
 
+# Import Sentinel-1 module
+from core.sentinel1 import get_sentinel1_image
+
 #Import indices (NDVI ,NDWI) module
-from core.indices import (calculate_ndvi,calculate_ndwi, get_mean_index)
+from core.indices import (
+    calculate_ndvi,
+    calculate_ndwi,
+    calculate_rvi,
+    get_mean_index )
 
 #Import Get landcover histogram map
 from core.landcover import (
@@ -22,10 +29,9 @@ from core.landcover import (
 
 # Earth Engine Initialization
 
-ee.Initialize(
-    project="fleet-passage-470910-u3"
-)
+ee.Initialize(project="fleet-passage-470910-u3")
 
+print("Earth Engine Initialized Successfully")
 
 # =====================================
 # User Inputs
@@ -39,9 +45,9 @@ user_input = {
 
     "radius": 1500,
 
-    "start_date": "2025-06-10",
+    "start_date": "2025-07-10",
 
-    "end_date": "2025-07-10" }
+    "end_date": "2025-08-10" }
 
 # =====================================
 # Input Validation
@@ -56,37 +62,54 @@ if not (-180 <= user_input["longitude"] <= 180):
 if user_input["radius"] <= 0:
     raise ValueError("Radius must be greater than 0")
 
+
 # Create AOI
 
 aoi = create_aoi(
     user_input["latitude"],
     user_input["longitude"],
-    user_input["radius"]
-)
+    user_input["radius"] )
 
+print("AOI Created Successfully")
 
 # Fetch Sentinel-2 Image
 
-image = get_sentinel2_image(
+sentinel2_image = get_sentinel2_image(
     aoi=aoi,
 
     start_date=user_input["start_date"],
 
     end_date=user_input["end_date"] )
 
+print("Sentinel-2 Image Retrieved Successfully")
+
+# Fetch Sentinel-1 Image
+sentinel1_image = get_sentinel1_image(
+    aoi=aoi,
+    start_date=user_input["start_date"],
+    end_date=user_input["end_date"] )
+
+print("Sentinel-1 Image Retrieved Successfully")
 
 #Calculate NDVI 
-ndvi = calculate_ndvi(image)
+ndvi = calculate_ndvi(sentinel2_image)
 
 #Calculate NDWI 
-ndwi=calculate_ndwi(image)
+ndwi=calculate_ndwi(sentinel2_image)
 
 #Calculate Mean NDVI
 mean_ndvi = get_mean_index( ndvi , aoi)
+print("NDVI Calculated Successfully")
 
 # Calculate Mean NDWI
 
 mean_ndwi = get_mean_index( ndwi ,  aoi )
+print("NDWI Calculated Successfully")
+
+# RVI
+rvi = calculate_rvi(sentinel1_image)
+mean_rvi = get_mean_index(rvi ,aoi)
+print("RVI Calculate successfully")
 
 # Land Cover Histogram
 
@@ -99,17 +122,7 @@ landcover_stats = (
     get_landcover_statistics(histogram)
     )
 
-# =====================================
-# Validation
-# =====================================
 
-print("AOI Created Successfully")
-print("Sentinel-2 Image Retrieved Successfully")
-print("NDVI Calculated Successfully")
-print("NDWI Calculated Successfully")
-
-print(mean_ndvi)
-print(mean_ndwi)
 
 print("Land Cover Histogram Retrieved")
 
@@ -144,12 +157,9 @@ final_json = {
     },
 
     "indices": {
-
-        "mean_ndvi":
-        mean_ndvi,
-
-        "mean_ndwi":
-        mean_ndwi
+    "mean_ndvi": mean_ndvi,
+    "mean_ndwi": mean_ndwi,
+    "mean_rvi": mean_rvi
     },
 
     "land_cover":

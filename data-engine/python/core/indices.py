@@ -54,6 +54,54 @@ def calculate_ndwi(image):
 
     return ndwi
 
+# =====================================
+# RVI Calculation
+# =====================================
+
+def calculate_rvi(image):
+    """
+    Calculate Radar Vegetation Index (RVI)
+    from Sentinel-1 VV and VH bands.
+
+    Parameters
+    ----------
+    image : ee.Image
+
+    Returns
+    -------
+    ee.Image
+        Radar Vegetation Index (RVI)
+    """
+
+    # Select VV and VH bands
+    vv = image.select("VV")
+    vh = image.select("VH")
+
+    # Convert VV from dB to Linear
+    vv_linear = (
+        ee.Image.constant(10)
+        .pow(vv.divide(10))
+    )
+
+    # Convert VH from dB to Linear
+    vh_linear = (
+        ee.Image.constant(10)
+        .pow(vh.divide(10))
+    )
+
+    # Calculate RVI
+    rvi = (
+        ee.Image().expression(
+            "(4 * vh) / (vv + vh)",
+            {
+                "vv": vv_linear,
+                "vh": vh_linear
+            }
+        )
+    )
+
+    return rvi.rename("RVI")
+
 def get_mean_index(index_image, aoi):
     """
     Calculate mean value of an index
@@ -80,11 +128,9 @@ def get_mean_index(index_image, aoi):
         maxPixels=1e9
     )
 
-    # Extract value from Earth Engine dictionary
     mean_value = mean_value.getInfo()
 
-    # Get numerical value
-    mean_value = mean_value.get('nd', 0)
+    # Extract first value from dictionary
+    mean_value = list(mean_value.values())[0]
 
-    # Round for cleaner output
-    return round(mean_value, 2)
+    return round( mean_value,2)

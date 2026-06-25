@@ -99,7 +99,7 @@ def get_sentinel2_image(
         .size()
         .getInfo() )
     
-    print( "\nImages Found:",collection_size)
+    print( "\nImages Found sentinel2:",collection_size)
 
     # No image found
     if collection_size == 0:
