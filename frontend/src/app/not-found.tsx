@@ -9,6 +9,10 @@ import { Headset, Home, Leaf, Mail, MoveLeft } from "lucide-react";
 const NotFound = () => {
   const router = useRouter();
   const [canGoBack, setCanGoBack] = useState(false);
+  
+  useEffect(() => {
+  document.title = "404 Not Found | KrishiRakshak AI";
+}, []);
 
   useEffect(() => {
     setCanGoBack(window.history.length > 2);
