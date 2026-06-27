@@ -5,6 +5,7 @@
 
 import ee
 import json
+from datetime import datetime
 
 # Import AOI module
 from core.aoi import create_aoi
@@ -27,6 +28,9 @@ from core.landcover import (
     get_landcover_histogram,
     get_landcover_statistics )
 
+#Import stress module
+from core.stress import (calculate_crop_stress)
+
 # Earth Engine Initialization
 
 ee.Initialize(project="fleet-passage-470910-u3")
@@ -45,9 +49,9 @@ user_input = {
 
     "radius": 1500,
 
-    "start_date": "2025-07-10",
+    "start_date": "2025-06-05",
 
-    "end_date": "2025-08-10" }
+    "end_date": "2025-06-25" }
 
 # =====================================
 # Input Validation
@@ -59,10 +63,23 @@ if not (-90 <= user_input["latitude"] <= 90):
 if not (-180 <= user_input["longitude"] <= 180):
     raise ValueError("Invalid Longitude")
 
-if user_input["radius"] <= 0:
-    raise ValueError("Radius must be greater than 0")
+if not (100 <= user_input["radius"] <= 5000):
+    raise ValueError(
+        "Radius must be between 100 and 5000 meters." )
+    
+try:
+    start_date = datetime.strptime( user_input["start_date"], "%Y-%m-%d" )
 
+    end_date = datetime.strptime( user_input["end_date"], "%Y-%m-%d" )
 
+except ValueError:
+    raise ValueError(
+        "Date format must be YYYY-MM-DD.")
+
+if start_date >= end_date:
+    raise ValueError(
+        "Start date must be earlier than end date." )
+    
 # Create AOI
 
 aoi = create_aoi(
@@ -132,6 +149,12 @@ print( "\nLand Cover Statistics")
 
 print(landcover_stats)
 
+stress = calculate_crop_stress(
+    mean_ndvi,
+    mean_ndwi,
+    mean_rvi,
+    landcover_stats)
+ 
 # =====================================
 # Final JSON Output
 # =====================================
@@ -168,7 +191,7 @@ final_json = {
     # Future Modules
     "crop_type": None,
 
-    "stress_index": None,
+    "stress_index": stress,
 
     "growth_stage": None
 }
