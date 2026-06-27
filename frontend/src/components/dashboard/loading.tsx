@@ -2,7 +2,7 @@ export default function Loading() {
   return (
     <div className="p-6 space-y-4 animate-pulse">
       {/* Chart Skeleton */}
-      <div className="h-[350px] w-full bg-gray-200 rounded-xl"></div>
+      <div className="h-87.5 w-full bg-gray-200 rounded-xl"></div>
       {/* Grid Skeleton */}
       <div className="grid grid-cols-4 gap-4">
         {[1, 2, 3, 4].map((i) => (

@@ -37,7 +37,7 @@ const AnalyticsChart = () => {
       </div>
 
       {/* Line Chart */}
-     <div className="flex-1 w-full h-[200px] relative">
+     <div className="flex-1 w-full h-50 relative">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={data} margin={{ top: 5, right: 0, left: -20, bottom: 0 }}>
             <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f0f0f0" />

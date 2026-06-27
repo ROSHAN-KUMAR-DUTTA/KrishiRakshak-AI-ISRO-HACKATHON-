@@ -12,7 +12,7 @@ async function getData() {
 export default async function Home() {
   await getData();
   return (
-    <Suspense fallback={<div className="h-[500px] flex items-center justify-center">Loading Data...</div>}>
+    <Suspense fallback={<div className="h-125 flex items-center justify-center">Loading Data...</div>}>
       <DashboardView />
     </Suspense>
   );
