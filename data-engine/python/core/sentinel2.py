@@ -72,7 +72,9 @@ def get_sentinel2_image(
     ee.Image
         Latest cloud-masked Sentinel-2 image
     """
-
+    
+    max_fallback_days = 6
+    
     # =====================================
     # Create Sentinel-2 Collection
     # =====================================
@@ -106,26 +108,83 @@ def get_sentinel2_image(
         raise ValueError(
             "No Sentinel-2 images found for the selected AOI and date range.")
 
-  
+    
+    image_list = (
+        collection
+        .sort("system:time_start", False)
+        .toList(collection_size) )
+    
+    latest_image = ee.Image(image_list.get(0))
+
+    latest_date = (
+    ee.Date(
+        latest_image.get("system:time_start"))
+    .millis()
+    .getInfo() )
+    
+    # =====================================
+    # Find Latest Usable Image
+    # =====================================
+
+    for  i in range(collection_size):
+
+        selected_image = ee.Image(image_list.get(i) )
+        
+        # Image Date
+        date = (
+        ee.Date(
+            selected_image.get("system:time_start") )
+        .format("YYYY-MM-dd")
+        .getInfo() )
+        
+        current_date = (
+        ee.Date(selected_image.get("system:time_start"))
+        .millis()
+        .getInfo())
+
+        days_difference = (latest_date - current_date ) / (1000 * 60 * 60 * 24)
+        
+        selected_image = mask_clouds( selected_image)
+        
+        if days_difference > max_fallback_days:
+            print(  "Maximum fallback limit reached.")
+            break
+        
+        valid_pixels = (
+            selected_image.select("B4")
+            .reduceRegion(
+            reducer=ee.Reducer.count(),
+            geometry=aoi,
+            scale=10,
+            maxPixels=1e9 )
+            .getInfo() )
+        
+        pixel_count = valid_pixels.get("B4", 0)
+        if pixel_count > 0:
+            print("Selected Image:", date)
+            return selected_image
+        
+    raise ValueError(
+    "No usable Sentinel-2 image found after cloud masking.")
+        
     # =====================================
     # Select Latest Usable Image
     # =====================================
 
-    selected_image = (
-        collection
-        .sort(
-            "system:time_start",
-            False
-        )
-        .first()
-    )
+    # selected_image = (
+    #     collection
+    #     .sort(
+    #         "system:time_start",
+    #         False
+    #     )
+    #     .first() )
 
     
-    #cloud masking
-    selected_image = mask_clouds(
-        selected_image
-    )
+    # #cloud masking
+    # selected_image = mask_clouds(
+    #     selected_image
+    # )
 
-    # Return Final Image
+    # # Return Final Image
     
-    return selected_image
+    # return selected_image

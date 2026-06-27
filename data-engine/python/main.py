@@ -5,6 +5,7 @@
 
 import ee
 import json
+import sys
 from datetime import datetime
 
 # Import AOI module
@@ -49,9 +50,9 @@ user_input = {
 
     "radius": 1500,
 
-    "start_date": "2025-06-05",
+    "start_date": "2025-11-22",
 
-    "end_date": "2025-06-25" }
+    "end_date": "2025-11-25" }
 
 # =====================================
 # Input Validation
@@ -91,13 +92,20 @@ print("AOI Created Successfully")
 
 # Fetch Sentinel-2 Image
 
-sentinel2_image = get_sentinel2_image(
-    aoi=aoi,
+try:
 
-    start_date=user_input["start_date"],
+    sentinel2_image = get_sentinel2_image(
+        aoi=aoi,
+        start_date=user_input["start_date"],
+        end_date=user_input["end_date"]
+    )
 
-    end_date=user_input["end_date"] )
+except ValueError as e:
 
+    print("\nERROR")
+    print(e)
+    sys.exit()
+    
 print("Sentinel-2 Image Retrieved Successfully")
 
 # Fetch Sentinel-1 Image
