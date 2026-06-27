@@ -129,8 +129,17 @@ def get_mean_index(index_image, aoi):
     )
 
     mean_value = mean_value.getInfo()
+    
+    print("\nMean Dictionary")
+
+    print(mean_value)
 
     # Extract first value from dictionary
     mean_value = list(mean_value.values())[0]
 
-    return round( mean_value,2)
+    # No valid pixels found
+    if mean_value is None:
+     raise ValueError(
+        "No valid pixels found after cloud masking." )
+
+    return round(mean_value, 2)
