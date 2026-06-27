@@ -73,7 +73,7 @@ def get_sentinel2_image(
         Latest cloud-masked Sentinel-2 image
     """
     
-    max_fallback_days = 6
+    max_fallback_days = 7
     
     # =====================================
     # Create Sentinel-2 Collection
