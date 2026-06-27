@@ -11,7 +11,7 @@ interface HeaderProps {
 const Header = ({title,subtitle,icon,rightContent,toggleSidebar}:HeaderProps) => {
   const Icon=icon;
   return (
-    <header className="bg-[#fefdfd] text-black w-full p-4 sticky top-0">
+    <header className="bg-[#fefdfd] text-black w-full p-4 sticky top-0 z-100">
       <div className="flex justify-between font-bold">
         <div className="flex items-center space-x-5">
           <button className="active:scale-95 active:text-green-600 hover:text-green-600 z-50 cursor-pointer" onClick={toggleSidebar}>

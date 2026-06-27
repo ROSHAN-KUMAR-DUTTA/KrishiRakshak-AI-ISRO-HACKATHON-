@@ -11,9 +11,9 @@ const FieldHealthChart = () => {
   const total = data.reduce((sum, item) => sum + item.value, 0);
 
   return (
-    <div className="flex items-center justify-between h-48">
-      {/* Chart Section */}
-      <div className="w-1/2 h-full relative">
+   <div className="flex items-center justify-between h-48 w-full">
+      {/* Chart Section */ }
+      <div className="w-1/2 h-[180px] relative">
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
             <Pie
