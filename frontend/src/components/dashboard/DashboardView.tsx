@@ -117,10 +117,10 @@ export default function DashboardView() {
       {/* Main Grid Skeleton (Charts & Map) */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Analytics & Map Area */}
-        <div className="lg:col-span-8 h-[500px] bg-gray-200 rounded-xl"></div>
+        <div className="lg:col-span-8 h-125 bg-gray-200 rounded-xl"></div>
         
         {/* Weather & Alerts Area */}
-        <div className="lg:col-span-4 h-[500px] bg-gray-200 rounded-xl"></div>
+        <div className="lg:col-span-4 h-125 bg-gray-200 rounded-xl"></div>
       </div>
     </div>
   );
@@ -138,13 +138,13 @@ export default function DashboardView() {
       {/* Row 2: Health, Irrigation, Weather, Alerts */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-3">
         {/* Field Health Overview */}
-        <BaseCard className="lg:col-span-3 flex flex-col h-[350px]">
+        <BaseCard className="lg:col-span-3 flex flex-col h-87.5">
           <h2 className="font-bold text-gray-800 mb-4 shrink-0">
             Field Health Overview
           </h2>
 
           {/* The wrapper must have flex-1 and a strict minimum height */}
-          <div className="flex-1 w-full relative min-h-[200px]">
+          <div className="flex-1 w-full relative min-h-50">
             <FieldHealthChart />
           </div>
         </BaseCard>
@@ -207,7 +207,7 @@ export default function DashboardView() {
       {/* Row 3: Map & Calculator */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-3">
         {/* Map Card */}
-        <BaseCard className="lg:col-span-8 flex flex-col p-0 overflow-hidden h-[500px]">
+        <BaseCard className="lg:col-span-8 flex flex-col p-0 overflow-hidden h-125">
           <div className="p-4 flex justify-between items-start">
             <div>
               <h2 className="font-bold text-gray-800">
@@ -244,7 +244,7 @@ export default function DashboardView() {
         </BaseCard>
 
         {/* Calculator Card */}
-        <BaseCard className="lg:col-span-4 h-[500px] flex flex-col">
+        <BaseCard className="lg:col-span-4 h-125 flex flex-col">
           <h2 className="font-bold text-gray-800 mb-1">
             Economic Impact Calculator
           </h2>
@@ -260,7 +260,7 @@ export default function DashboardView() {
       {/* Row 4: Analytics, Weather, Alerts, Reports */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-3 items-stretch">
         {/* Analytics Card */}
-        <BaseCard className="lg:col-span-4 h-[350px] flex flex-col overflow-hidden">
+        <BaseCard className="lg:col-span-4 h-87.5 flex flex-col overflow-hidden">
           <div className="flex justify-between items-center mb-4 shrink-0">
             <div>
               <h2 className="font-bold text-gray-800 text-sm">
@@ -286,7 +286,7 @@ export default function DashboardView() {
         </BaseCard>
 
         {/* Weather Intelligence */}
-        <BaseCard className="lg:col-span-3 h-[350px] flex flex-col overflow-hidden">
+        <BaseCard className="lg:col-span-3 h-87.5 flex flex-col overflow-hidden">
           <div className="p-2 border-b border-gray-100 shrink-0">
             <h2 className="font-bold text-gray-800 text-sm">
               Weather Intelligence
@@ -301,7 +301,7 @@ export default function DashboardView() {
         </BaseCard>
 
         {/* Alerts & Notifications */}
-        <BaseCard className="lg:col-span-3 h-[350px] flex flex-col overflow-hidden">
+        <BaseCard className="lg:col-span-3 h-87.5 flex flex-col overflow-hidden">
           <div className="p-4 border-b border-gray-100 flex justify-between items-center shrink-0">
             <div>
               <h2 className="font-bold text-gray-800 text-sm">
@@ -319,7 +319,7 @@ export default function DashboardView() {
         </BaseCard>
 
         {/* Reports & Export */}
-        <BaseCard className="lg:col-span-2 h-[350px] flex flex-col overflow-hidden p-4">
+        <BaseCard className="lg:col-span-2 h-87.5 flex flex-col overflow-hidden p-4">
           <div className="mb-3 shrink-0">
             <h2 className="font-bold text-gray-800 text-sm">
               Reports & Export

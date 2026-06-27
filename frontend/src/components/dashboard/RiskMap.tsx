@@ -55,13 +55,13 @@ const RiskMap = () => {
       </MapContainer>
 
       {/* Layers Button Overlay (Top Right) */}
-      <button className="absolute top-4 right-4 z-[400] bg-white px-3 py-1.5 rounded shadow-md flex items-center gap-2 text-sm font-bold text-gray-700">
+      <button className="absolute top-4 right-4 z-400 bg-white px-3 py-1.5 rounded shadow-md flex items-center gap-2 text-sm font-bold text-gray-700">
         <Layers size={16} />
         Layers
       </button>
 
       {/* Legend Overlay (Bottom Right) */}
-      <div className="absolute bottom-4 right-4 z-[400] bg-white p-3 rounded shadow-md w-32">
+      <div className="absolute bottom-4 right-4 z-400 bg-white p-3 rounded shadow-md w-32">
         <h4 className="text-xs font-bold text-gray-800 mb-2">Risk Level</h4>
         <div className="flex flex-col gap-1.5">
           <div className="flex items-center gap-2 text-xs text-gray-600"><span className="w-3 h-3 rounded-full bg-[#22c55e]"></span> Low</div>
