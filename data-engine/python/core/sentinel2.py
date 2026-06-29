@@ -131,7 +131,7 @@ def get_sentinel2_image(
         selected_image = ee.Image(image_list.get(i) )
         
         # Image Date
-        date = (
+        selected_date = (
         ee.Date(
             selected_image.get("system:time_start") )
         .format("YYYY-MM-dd")
@@ -161,8 +161,8 @@ def get_sentinel2_image(
         
         pixel_count = valid_pixels.get("B4", 0)
         if pixel_count > 0:
-            print("Selected Image:", date)
-            return selected_image
+            print("Selected Image:", selected_date)
+            return selected_image, selected_date
         
     raise ValueError(
     "No usable Sentinel-2 image found after cloud masking.")
