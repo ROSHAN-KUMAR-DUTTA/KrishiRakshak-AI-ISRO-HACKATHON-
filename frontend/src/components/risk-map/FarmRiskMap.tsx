@@ -31,15 +31,15 @@ export default function FarmRiskMap() {
   ];
 
   return (
-    <div className="relative h-[550px] w-full bg-white rounded-2xl border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] overflow-hidden">
+    <div className="relative h-137.5 w-full bg-white rounded-2xl border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] overflow-hidden">
       
       {/* Controls */}
-      <div className="absolute top-4 right-4 z-[400]">
+      <div className="absolute top-4 right-4 z-400">
         <button className="bg-white/90 backdrop-blur px-3 py-2 rounded-xl shadow-sm border border-gray-100 text-xs font-bold text-gray-700 flex items-center gap-1.5 hover:bg-white hover:shadow-md active:scale-95 transition-all">
           <Maximize2 size={14} /> Expand
         </button>
       </div>
-      <div className="absolute top-[85px] left-[10px] z-[400]">
+      <div className="absolute top-21.25 left-2.5 z-400">
         <button className="bg-white/90 backdrop-blur p-2 rounded-xl shadow-sm border border-gray-100 text-gray-700 hover:bg-white hover:text-green-600 active:scale-95 transition-all">
           <Layers size={18} />
         </button>
@@ -57,7 +57,7 @@ export default function FarmRiskMap() {
       </MapContainer>
 
       {/* Overlays */}
-      <div className="absolute bottom-4 left-4 z-[400] bg-white/95 backdrop-blur-sm p-4 rounded-xl shadow-lg border border-gray-100 min-w-[140px]">
+      <div className="absolute bottom-4 left-4 z-400 bg-white/95 backdrop-blur-sm p-4 rounded-xl shadow-lg border border-gray-100 min-w-35">
         <p className="text-xs font-black mb-3 text-gray-900 tracking-wide uppercase">Risk Level</p>
         <div className="space-y-3 text-xs font-bold text-gray-600">
           <div className="flex items-center gap-2.5"><div className="w-3.5 h-3.5 rounded-full bg-red-500 shadow-inner"></div> High Risk</div>

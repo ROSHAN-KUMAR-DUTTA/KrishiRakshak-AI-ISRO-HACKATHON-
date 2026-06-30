@@ -32,7 +32,7 @@ export default function AdvisoryStats() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
       {stats.map((s, i) => (
-        <div key={i} className={`${s.cardBg} p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col justify-between h-[140px] hover:-translate-y-1 transition-transform duration-300 cursor-default`}>
+        <div key={i} className={`${s.cardBg} p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col justify-between h-35 hover:-translate-y-1 transition-transform duration-300 cursor-default`}>
           <div className="flex justify-between items-start">
             <p className="text-xs font-semibold text-gray-500 mt-1">{s.title}</p>
             <div className={`p-0 bg-transparent`}>

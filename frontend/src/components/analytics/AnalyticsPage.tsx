@@ -80,7 +80,7 @@ export default function AnalyticsPage() {
                     <item.icon className={`w-4 h-4 ${item.iconColor} ${item.fill ? 'fill-current' : ''}`} /> {item.label}
                   </span>
                   <span className={`font-bold flex items-center gap-1 ${item.trend === 'up' ? 'text-green-600' : 'text-red-500'}`}>
-                    {item.trend === 'up' ? <ArrowUpRight className="w-3.5 h-3.5 stroke-[3]" /> : <ArrowDownRight className="w-3.5 h-3.5 stroke-[3]" />}
+                    {item.trend === 'up' ? <ArrowUpRight className="w-3.5 h-3.5 stroke-3" /> : <ArrowDownRight className="w-3.5 h-3.5 stroke-3" />}
                     {item.val}
                   </span>
                 </div>

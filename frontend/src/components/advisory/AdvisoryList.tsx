@@ -65,7 +65,7 @@ export default function AdvisoryList() {
             
             {/* 1. Gradient Image Icon & Name */}
             <div className="flex items-center gap-4 w-[30%]">
-              <div className={`w-12 h-12 shrink-0 rounded-xl flex items-center justify-center text-white shadow-sm bg-gradient-to-br ${adv.grad}`}>
+              <div className={`w-12 h-12 shrink-0 rounded-xl flex items-center justify-center text-white shadow-sm bg-linear-to-br ${adv.grad}`}>
                 <Sprout size={22} strokeWidth={1.5} />
               </div>
               <div>

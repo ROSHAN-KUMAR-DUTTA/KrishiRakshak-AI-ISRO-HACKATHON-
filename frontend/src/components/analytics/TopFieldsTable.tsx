@@ -56,7 +56,7 @@ export default function TopFieldsTable() {
               <td className="px-4 py-3.5 text-slate-800 font-bold">{field.prodIndex}</td>
               <td className="px-4 py-3.5 text-right">
                 {/* Updated SVG with exact curve and green drop-shadow */}
-                <svg className="w-[60px] h-[24px] inline-block overflow-visible" viewBox="0 0 60 24" fill="none">
+                <svg className="w-15 h-6 inline-block overflow-visible" viewBox="0 0 60 24" fill="none">
                   <path 
                     d="M4 16 C 12 10, 16 19, 28 13 C 40 7, 46 5, 56 8" 
                     stroke="#16a34a" 

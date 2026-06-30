@@ -13,7 +13,7 @@ export default function RiskCategoryChart() {
     <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.02)]">
       <h3 className="font-bold text-gray-900 mb-6">Risk by Category</h3>
       <div className="flex items-center justify-between gap-4">
-        <div className="relative w-40 h-40 flex-shrink-0 group cursor-crosshair">
+        <div className="relative w-40 h-40 shrink-0 group cursor-crosshair">
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
               <Tooltip contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 20px rgba(0,0,0,0.1)', fontSize: '12px', fontWeight: 'bold' }} />

@@ -14,7 +14,7 @@ export default function AdvisoryChart() {
       <h3 className="text-sm font-bold text-gray-900 mb-6">Advisory by Category</h3>
       <div className="flex items-center justify-between gap-4">
         
-        <div className="relative w-36 h-36 flex-shrink-0">
+        <div className="relative w-36 h-36 shrink-0">
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
               <Tooltip contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 12px rgba(0,0,0,0.1)', fontSize: '11px', fontWeight: 'bold' }} />
