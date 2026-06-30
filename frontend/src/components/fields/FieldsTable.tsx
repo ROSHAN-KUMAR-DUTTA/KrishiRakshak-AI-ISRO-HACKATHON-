@@ -185,7 +185,7 @@ export default function FieldsTable({
 
       {/* Table */}
       <div className="overflow-x-auto">
-        <table className="w-full min-w-[860px] border-collapse">
+        <table className="w-full min-w-215 border-collapse">
           <thead>
             <tr className="border-y border-gray-100 bg-gray-50/60">
               <th className="whitespace-nowrap px-6 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500">
@@ -225,11 +225,11 @@ export default function FieldsTable({
                       <img
                         src={field.image}
                         alt={field.name}
-                        className="h-11 w-14 flex-shrink-0 rounded-lg object-cover"
+                        className="h-11 w-14 shrink-0 rounded-lg object-cover"
                       />
                     ) : (
                       <div
-                        className={`flex h-11 w-14 flex-shrink-0 items-center justify-center rounded-lg bg-gradient-to-br ${
+                        className={`flex h-11 w-14 shrink-0 items-center justify-center rounded-lg bg-linear-to-br ${
                           cropGradient[field.crop] ?? "from-gray-300 to-gray-500"
                         }`}
                       >

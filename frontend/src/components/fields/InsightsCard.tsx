@@ -48,7 +48,7 @@ export default function InsightsCard({
       }`}
     >
       <div
-        className={`flex h-15 w-15 flex-shrink-0 items-center justify-center rounded-xl ${styles.bg}`}
+        className={`flex h-15 w-15 shrink-0 items-center justify-center rounded-xl ${styles.bg}`}
       >
         <Icon className={`h-6 w-6 ${styles.icon}`} />
       </div>

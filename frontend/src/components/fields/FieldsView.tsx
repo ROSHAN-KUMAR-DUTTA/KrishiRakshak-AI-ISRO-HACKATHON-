@@ -4,6 +4,7 @@ import StatsCard from "./StatsCard";
 import FieldsTable from "./FieldsTable";
 import InsightsCard, { InsightTone } from "./InsightsCard";
 import { ClipboardCheck, Droplet, FileText, HeartPulse, Leaf, LucideIcon, Map, PlusCircle, Sprout } from "lucide-react";
+import { useEffect, useState } from "react";
 export interface Insight {
   id: string;
   icon: LucideIcon;
@@ -73,6 +74,41 @@ const statData = [
 ];
 
 export default function FieldsView() {
+  const [loading, setLoading] = useState(true);
+  
+    useEffect(() => {
+      // 1.5 seconds ka fake loading state
+      const timer = setTimeout(() => setLoading(false), 1500);
+      return () => clearTimeout(timer);
+    }, []);
+  
+    if (loading) {
+    return (
+      <div className="p-6 space-y-6 animate-pulse">
+        {/* Header Skeleton */}
+        <div className="flex justify-between items-center mb-6">
+          <div className="h-8 w-48 bg-gray-200 rounded"></div>
+          <div className="h-8 w-32 bg-gray-200 rounded"></div>
+        </div>
+  
+        {/* Stats Row Skeleton */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          {[1, 2, 3, 4].map((i) => (
+            <div key={i} className="h-24 bg-gray-200 rounded-xl"></div>
+          ))}
+        </div>
+  
+        {/* Main Grid Skeleton (Charts & Map) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          {/* Analytics & Map Area */}
+          <div className="lg:col-span-8 h-125 bg-gray-200 rounded-xl"></div>
+          
+          {/* Weather & Alerts Area */}
+          <div className="lg:col-span-4 h-125 bg-gray-200 rounded-xl"></div>
+        </div>
+      </div>
+    );
+  }
   return (
     // Pura page container
     <div className="flex flex-col gap-6 w-full p-5">
