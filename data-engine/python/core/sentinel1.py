@@ -57,8 +57,7 @@ def get_sentinel1_image(
 
     if collection_size == 0:
         raise ValueError(
-            "No Sentinel-1 images found."
-        )
+            "No Sentinel-1 images found." )
         
     
     print("\nImages Found sentinel-1:", collection_size )
@@ -73,8 +72,6 @@ def get_sentinel1_image(
         )
         .first() )
 
-
-    
     
     return selected_image
 

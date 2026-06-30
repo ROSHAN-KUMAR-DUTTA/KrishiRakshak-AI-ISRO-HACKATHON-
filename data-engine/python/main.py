@@ -5,7 +5,8 @@
 
 import ee
 import json
-from datetime import datetime
+import sys
+from datetime import datetime 
 
 # Import AOI module
 from core.aoi import create_aoi
@@ -49,9 +50,9 @@ user_input = {
 
     "radius": 1500,
 
-    "start_date": "2025-06-05",
+    "start_date": "2025-11-15",
 
-    "end_date": "2025-06-25" }
+    "end_date": "2025-11-25" }
 
 # =====================================
 # Input Validation
@@ -91,20 +92,27 @@ print("AOI Created Successfully")
 
 # Fetch Sentinel-2 Image
 
-sentinel2_image = get_sentinel2_image(
-    aoi=aoi,
+try:
 
-    start_date=user_input["start_date"],
+    sentinel2_image,sentinel2_date = get_sentinel2_image(
+        aoi=aoi,
+        start_date=user_input["start_date"],
+        end_date=user_input["end_date"] )
+    
+except ValueError as e:
 
-    end_date=user_input["end_date"] )
-
+    print("\nERROR")
+    print(e)
+    sys.exit()
+    
 print("Sentinel-2 Image Retrieved Successfully")
 
 # Fetch Sentinel-1 Image
 sentinel1_image = get_sentinel1_image(
     aoi=aoi,
     start_date=user_input["start_date"],
-    end_date=user_input["end_date"] )
+    end_date=user_input["end_date"]
+)
 
 print("Sentinel-1 Image Retrieved Successfully")
 
@@ -188,12 +196,12 @@ final_json = {
     "land_cover":
     landcover_stats,
 
-    # Future Modules
-    "crop_type": None,
+    # # Future Modules
+    # "crop_type": None,
 
     "stress_index": stress,
 
-    "growth_stage": None
+    # "growth_stage": None
 }
 
 print("\nFinal JSON Output\n")
