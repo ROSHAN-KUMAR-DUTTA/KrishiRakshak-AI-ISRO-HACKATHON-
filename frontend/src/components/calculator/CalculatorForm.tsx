@@ -32,7 +32,7 @@ export default function CalculatorForm() {
                   </select>
                 )}
                 {f.unit ? (
-                  <span className="absolute right-3.5 top-[11px] text-[11px] font-bold text-slate-400">{f.unit}</span>
+                  <span className="absolute right-3.5 top-2.75 text-[11px] font-bold text-slate-400">{f.unit}</span>
                 ) : (
                   <ChevronDown size={14} className="absolute right-3.5 top-3 text-slate-400 pointer-events-none group-hover:text-slate-600 transition-colors" />
                 )}

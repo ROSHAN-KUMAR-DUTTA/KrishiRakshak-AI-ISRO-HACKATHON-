@@ -1,4 +1,4 @@
-import CalculatorPage from "@/components/calculator/CalculatorPage";
+import AlertsPage from "@/components/alerts/AlertsPage";
 import { Suspense } from "react";
 
 export const metadata = {
@@ -9,7 +9,7 @@ export const metadata = {
 export default async function Home() {
   return (
     <Suspense fallback={<div className="h-125 flex items-center justify-center">Loading Data...</div>}>
-      <CalculatorPage />
+      <AlertsPage />
     </Suspense>
   );
 }

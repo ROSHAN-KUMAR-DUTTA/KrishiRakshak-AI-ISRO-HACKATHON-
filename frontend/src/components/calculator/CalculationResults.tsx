@@ -8,7 +8,7 @@ export default function CalculationResults() {
         <h2 className="font-bold text-slate-900 text-sm tracking-tight">Calculation Results</h2>
         <p className="text-[11px] text-slate-500 mt-1 mb-6 font-medium">Based on current conditions and crop data</p>
 
-        <div className="bg-gradient-to-br from-[#f0f9ff] to-[#e0f2fe] border border-blue-100/50 rounded-2xl p-6 relative overflow-hidden mb-5 group shadow-inner">
+        <div className="bg-linear-to-br from-[#f0f9ff] to-[#e0f2fe] border border-blue-100/50 rounded-2xl p-6 relative overflow-hidden mb-5 group shadow-inner">
           <Droplet size={100} className="absolute -right-6 -bottom-6 text-blue-200/40 group-hover:scale-110 transition-transform duration-700 ease-out" fill="currentColor" />
           <div className="relative z-10">
             <h4 className="text-[11px] font-bold text-blue-700 mb-1.5 tracking-wide">Total Water Requirement</h4>
